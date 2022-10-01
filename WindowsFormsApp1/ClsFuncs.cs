@@ -106,18 +106,6 @@ namespace TicketClientApp
 
         public static void WriteTotextFile(TicketWebService.UserAuthenticateRet authenticate_ret)
         {
-            //Process process = new Process
-            //{
-            //    StartInfo = new ProcessStartInfo
-            //    {
-            //        FileName = Application.ExecutablePath,
-            //        Arguments = "-e",
-            //        Verb = "runas",//-Admin.
-            //    }
-            //};
-            //process.Start();
-
-
 
             string fileName = Application.StartupPath + "\\temp.txt";
             FileInfo fi = new FileInfo(fileName);
