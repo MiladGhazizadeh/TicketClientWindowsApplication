@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="authenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="authenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authenticateResult" type="tns:AuthenticateRetVal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AuthenticateRetVal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" />
+          <s:element minOccurs="0" maxOccurs="1" name="san" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="logOut">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="logOutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="logOutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTicketRankingResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="san_list" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dt_start" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dt_end" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RankingTicketResult_forSan">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RankingUserInfo_list" type="tns:ArrayOfRankingUserInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="error_messaage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRankingUserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RankingUserInfo" nillable="true" type="tns:RankingUserInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RankingUserInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="user_san" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ticketCount_closedInPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ticketCount_sendedInPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="referenceCount_closedInPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="referenceCount_ReferedInPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="average_ticketsScore" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="average_ReferencesScore" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="notFinished_references_InPeriod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="negativeTicketCount_considerCoefficient_InPeriod" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="ticketDeadline_delay_inSecond" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="project_performance_coefficient" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="avg_newTickets_SeenTime_inSecond" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="sum_newMessages_SeenTime_inSecond" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="avg_newMessages_SeenTime_inSecond" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTicketRankingResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTicketRankingResultResult" type="tns:RankingTicketResult_forSan" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AutoPickupTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ticketPool">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="lstTicketPool_done" type="tns:ArrayOfInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="lstTicketPool_error" type="tns:ArrayOfInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AutoPickupTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AutoPickupTicketResult" type="tns:ticketPool" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FetchNewConversations_">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="NewConversations">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Msg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LstConversations" type="tns:ArrayOfConversationInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserAuthenticateRet" type="tns:UserAuthenticateRet" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfConversationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ConversationInfo" nillable="true" type="tns:ConversationInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ConversationInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="TicketId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ModifyDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderCN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SenderImg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReciverSan" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewMessagesCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SenderIsAGroup" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="SenderIsAPool" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserAuthenticateRet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="token" />
+          <s:element minOccurs="0" maxOccurs="1" name="user_san" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="user_cn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="user_image" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="FetchNewConversations_Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchNewConversations_Result" type="tns:NewConversations" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FetchNewConversations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FetchNewConversationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FetchNewConversationsResult" type="tns:NewConversations" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserAuthenticate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserAuthenticateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserAuthenticateResult" type="tns:UserAuthenticateRet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Report_ticketSummery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="tso_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceLine" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="reportResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="group_with_maxTicket_gid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="group_with_maxTicket_gName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="group_with_maxTicket_count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="group_with_maxTicket_average" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" name="group_with_topAverage_gid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="group_with_topAverage_gName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="group_with_topAverage_count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="group_with_topAverage_average" type="s:double" />
+          <s:element minOccurs="1" maxOccurs="1" name="totall_ticket_count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="day_with_maxTicket_date" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="day_with_maxTicket_farsiDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="day_with_maxTicket_count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="totall_teobj" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Report_ticketSummeryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Report_ticketSummeryResult" type="tns:reportResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllProjects">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="main_workingCategory_id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectsMode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="fava_project_summery">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="projectList_info" type="tns:ArrayOfProject_info" />
+          <s:element minOccurs="0" maxOccurs="1" name="tickets" type="tns:ArrayOfProject_ticket" />
+          <s:element minOccurs="0" maxOccurs="1" name="ticket_list" type="tns:ArrayOfProject_ticket" />
+          <s:element minOccurs="0" maxOccurs="1" name="users" type="tns:ArrayOfInvolved_user" />
+          <s:element minOccurs="0" maxOccurs="1" name="mergedPrj_info" type="tns:ArrayOfProject_info" />
+          <s:element minOccurs="0" maxOccurs="1" name="error_messaage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="projectList_unit" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="result_headerTitle" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProject_info">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="project_info" nillable="true" type="tns:project_info" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="project_info">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ticket_count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ticket_open_count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ticket_close_count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="execute_day" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="strDate_info" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="execute_info" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="prj_id" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="cat_id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="cat_title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="director_san" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="director" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="director_img" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="work_days" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="vacation_days" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="est_working_hour" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="approval_result" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="approval_details" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="finish_userSan" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="proggress_percent" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="strCurrentProggressPecrcent" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="desc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="creted_san" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="creator" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="est_start" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="est_end" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="created" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="finish_date" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastTicket_finishDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="lastMajor_updateDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="year" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="merging_date" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="merged_to" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="merging_info" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="merged_project_search_tag" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProject_ticket">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="project_ticket" nillable="true" type="tns:project_ticket" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="project_ticket">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cnt" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="rows" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInvolved_user">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="involved_user" nillable="true" type="tns:involved_user" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="involved_user">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="san" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="profileImg" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="estimatedHour" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllProjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllProjectsResult" type="tns:fava_project_summery" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="project_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectResult" type="tns:fava_project_summery" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ticketRandomChart">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="rootCategoryId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="chartId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ticketRandomChartResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ticketRandomChartResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="findAdUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchInput" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="adUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="cn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="mobile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="sam" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAdUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="adUser" nillable="true" type="tns:adUser" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="findAdUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="findAdUsersResult" type="tns:ArrayOfAdUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="authenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:authenticate" />
+  </wsdl:message>
+  <wsdl:message name="authenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:authenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="logOutSoapIn">
+    <wsdl:part name="parameters" element="tns:logOut" />
+  </wsdl:message>
+  <wsdl:message name="logOutSoapOut">
+    <wsdl:part name="parameters" element="tns:logOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTicketRankingResultSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTicketRankingResult" />
+  </wsdl:message>
+  <wsdl:message name="GetTicketRankingResultSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTicketRankingResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="AutoPickupTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:AutoPickupTicket" />
+  </wsdl:message>
+  <wsdl:message name="AutoPickupTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:AutoPickupTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="FetchNewConversations_SoapIn">
+    <wsdl:part name="parameters" element="tns:FetchNewConversations_" />
+  </wsdl:message>
+  <wsdl:message name="FetchNewConversations_SoapOut">
+    <wsdl:part name="parameters" element="tns:FetchNewConversations_Response" />
+  </wsdl:message>
+  <wsdl:message name="FetchNewConversationsSoapIn">
+    <wsdl:part name="parameters" element="tns:FetchNewConversations" />
+  </wsdl:message>
+  <wsdl:message name="FetchNewConversationsSoapOut">
+    <wsdl:part name="parameters" element="tns:FetchNewConversationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserAuthenticateSoapIn">
+    <wsdl:part name="parameters" element="tns:UserAuthenticate" />
+  </wsdl:message>
+  <wsdl:message name="UserAuthenticateSoapOut">
+    <wsdl:part name="parameters" element="tns:UserAuthenticateResponse" />
+  </wsdl:message>
+  <wsdl:message name="Report_ticketSummerySoapIn">
+    <wsdl:part name="parameters" element="tns:Report_ticketSummery" />
+  </wsdl:message>
+  <wsdl:message name="Report_ticketSummerySoapOut">
+    <wsdl:part name="parameters" element="tns:Report_ticketSummeryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllProjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllProjects" />
+  </wsdl:message>
+  <wsdl:message name="GetAllProjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProject" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="ticketRandomChartSoapIn">
+    <wsdl:part name="parameters" element="tns:ticketRandomChart" />
+  </wsdl:message>
+  <wsdl:message name="ticketRandomChartSoapOut">
+    <wsdl:part name="parameters" element="tns:ticketRandomChartResponse" />
+  </wsdl:message>
+  <wsdl:message name="findAdUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:findAdUsers" />
+  </wsdl:message>
+  <wsdl:message name="findAdUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:findAdUsersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AD_AuthenticateWebServiceSoap">
+    <wsdl:operation name="authenticate">
+      <wsdl:input message="tns:authenticateSoapIn" />
+      <wsdl:output message="tns:authenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="logOut">
+      <wsdl:input message="tns:logOutSoapIn" />
+      <wsdl:output message="tns:logOutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTicketRankingResult">
+      <wsdl:input message="tns:GetTicketRankingResultSoapIn" />
+      <wsdl:output message="tns:GetTicketRankingResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AutoPickupTicket">
+      <wsdl:input message="tns:AutoPickupTicketSoapIn" />
+      <wsdl:output message="tns:AutoPickupTicketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchNewConversations_">
+      <wsdl:input message="tns:FetchNewConversations_SoapIn" />
+      <wsdl:output message="tns:FetchNewConversations_SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="FetchNewConversations">
+      <wsdl:input message="tns:FetchNewConversationsSoapIn" />
+      <wsdl:output message="tns:FetchNewConversationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserAuthenticate">
+      <wsdl:input message="tns:UserAuthenticateSoapIn" />
+      <wsdl:output message="tns:UserAuthenticateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Report_ticketSummery">
+      <wsdl:input message="tns:Report_ticketSummerySoapIn" />
+      <wsdl:output message="tns:Report_ticketSummerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProjects">
+      <wsdl:input message="tns:GetAllProjectsSoapIn" />
+      <wsdl:output message="tns:GetAllProjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProject">
+      <wsdl:input message="tns:GetProjectSoapIn" />
+      <wsdl:output message="tns:GetProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ticketRandomChart">
+      <wsdl:input message="tns:ticketRandomChartSoapIn" />
+      <wsdl:output message="tns:ticketRandomChartSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="findAdUsers">
+      <wsdl:input message="tns:findAdUsersSoapIn" />
+      <wsdl:output message="tns:findAdUsersSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AD_AuthenticateWebServiceSoap" type="tns:AD_AuthenticateWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="authenticate">
+      <soap:operation soapAction="http://tempuri.org/authenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOut">
+      <soap:operation soapAction="http://tempuri.org/logOut" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTicketRankingResult">
+      <soap:operation soapAction="http://tempuri.org/GetTicketRankingResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AutoPickupTicket">
+      <soap:operation soapAction="http://tempuri.org/AutoPickupTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchNewConversations_">
+      <soap:operation soapAction="http://tempuri.org/FetchNewConversations_" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchNewConversations">
+      <soap:operation soapAction="http://tempuri.org/FetchNewConversations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAuthenticate">
+      <soap:operation soapAction="http://tempuri.org/UserAuthenticate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_ticketSummery">
+      <soap:operation soapAction="http://tempuri.org/Report_ticketSummery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProjects">
+      <soap:operation soapAction="http://tempuri.org/GetAllProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProject">
+      <soap:operation soapAction="http://tempuri.org/GetProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ticketRandomChart">
+      <soap:operation soapAction="http://tempuri.org/ticketRandomChart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAdUsers">
+      <soap:operation soapAction="http://tempuri.org/findAdUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AD_AuthenticateWebServiceSoap12" type="tns:AD_AuthenticateWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="authenticate">
+      <soap12:operation soapAction="http://tempuri.org/authenticate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="logOut">
+      <soap12:operation soapAction="http://tempuri.org/logOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTicketRankingResult">
+      <soap12:operation soapAction="http://tempuri.org/GetTicketRankingResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AutoPickupTicket">
+      <soap12:operation soapAction="http://tempuri.org/AutoPickupTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchNewConversations_">
+      <soap12:operation soapAction="http://tempuri.org/FetchNewConversations_" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FetchNewConversations">
+      <soap12:operation soapAction="http://tempuri.org/FetchNewConversations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAuthenticate">
+      <soap12:operation soapAction="http://tempuri.org/UserAuthenticate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Report_ticketSummery">
+      <soap12:operation soapAction="http://tempuri.org/Report_ticketSummery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllProjects">
+      <soap12:operation soapAction="http://tempuri.org/GetAllProjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProject">
+      <soap12:operation soapAction="http://tempuri.org/GetProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ticketRandomChart">
+      <soap12:operation soapAction="http://tempuri.org/ticketRandomChart" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="findAdUsers">
+      <soap12:operation soapAction="http://tempuri.org/findAdUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AD_AuthenticateWebService">
+    <wsdl:port name="AD_AuthenticateWebServiceSoap" binding="tns:AD_AuthenticateWebServiceSoap">
+      <soap:address location="https://ticket.nkums.ac.ir/AD_AuthenticateWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AD_AuthenticateWebServiceSoap12" binding="tns:AD_AuthenticateWebServiceSoap12">
+      <soap12:address location="https://ticket.nkums.ac.ir/AD_AuthenticateWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
