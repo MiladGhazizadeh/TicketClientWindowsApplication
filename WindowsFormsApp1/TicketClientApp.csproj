@@ -220,6 +220,17 @@
   <ItemGroup>
     <Content Include="chat_256.ico" />
     <Content Include="chat_32.ico" />
+    <Content Include="config.txt" />
+    <None Include="Resources\config.txt" />
+    <None Include="Resources\chat_96.ico" />
+    <None Include="Resources\close_blue5_48.png" />
+    <None Include="Resources\close_blue4_48.png" />
+    <None Include="Resources\close_blue3_48.png" />
+    <None Include="Resources\close_blue2_48.png" />
+    <None Include="Resources\close_blue1_48.png" />
+    <None Include="Resources\chat48.png" />
+    <None Include="Resources\close48.png" />
+    <None Include="Resources\minimize48.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

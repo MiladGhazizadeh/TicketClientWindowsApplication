@@ -16,18 +16,39 @@ namespace TicketClientApp
         static void Main()
         {
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form2());
 
+            const string appName = "NkumsWindowsDesktopApp"; //"UniqueAppId";
+            bool result;
+            var mutex = new System.Threading.Mutex(true, appName, out result);
 
-            string fileName = Application.StartupPath + "\\temp.txt";
-            FileInfo fi = new FileInfo(fileName);
-
-            if (fi.Exists)
-                Application.Run(new Form1());
+            if (!result)
+            {
+                MessageBox.Show("یک نسخه دیگر از برنامه مورد نظر هم اکنون در حال اجرا میباشد");
+                return;
+            }
             else
-                Application.Run(new FrmLogin());
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                #region MyRegion
+
+                //Application.Run(new Form2());
+
+
+                ClsFuncs.DeleteFiles_for_BeforeInstalation();
+
+                string fileName = Application.StartupPath + "\\temp.txt";
+                FileInfo fi = new FileInfo(fileName);
+
+                if (fi.Exists)
+                    Application.Run(new Form1());
+                else
+                    Application.Run(new FrmLogin());
+                #endregion
+            }
+
+            //GC.KeepAlive(mutex);
 
         }
     }

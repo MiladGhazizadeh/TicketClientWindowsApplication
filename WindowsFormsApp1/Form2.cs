@@ -530,7 +530,7 @@ namespace TicketClientApp
 
                 this.WindowState = FormWindowState.Minimized;
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }

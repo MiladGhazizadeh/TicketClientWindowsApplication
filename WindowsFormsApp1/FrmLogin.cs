@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
+using Microsoft.Win32;
 
 namespace TicketClientApp
 {
@@ -52,6 +53,7 @@ namespace TicketClientApp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+
             try
             {
 
@@ -82,6 +84,11 @@ namespace TicketClientApp
                                 san = authenticate_ret.user_san;
                                 cn = authenticate_ret.user_cn;
                                 img = authenticate_ret.user_image;
+
+                                RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                                reg.SetValue("TicketClientApp", Application.ExecutablePath.ToString());
+                                //MessageBox.Show("You have been successfully saved.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                             }
                             else
                             {
@@ -112,53 +119,6 @@ namespace TicketClientApp
             }
         }
 
-        //private void WriteTotextFile(TicketWebService.UserAuthenticateRet authenticate_ret)
-        //{
-
-
-        //    string fileName = Application.StartupPath + "\\temp.txt";
-        //    FileInfo fi = new FileInfo(fileName);
-
-        //    try
-        //    {
-        //        // Check if file already exists. If yes, delete it.     
-        //        if (fi.Exists)
-        //        {
-        //            fi.Delete();
-        //        }
-
-        //        // Create a new file     
-        //        using (FileStream fs = fi.Create())
-        //        {
-        //            Byte[] txt1 = new UTF8Encoding(true).GetBytes(ClsFuncs.DESEncrypt(authenticate_ret.user_san) + "\n");
-        //            fs.Write(txt1, 0, txt1.Length);
-
-        //            Byte[] txt2 = new UTF8Encoding(true).GetBytes(ClsFuncs.DESEncrypt(authenticate_ret.user_cn) + "\n");
-        //            fs.Write(txt2, 0, txt2.Length);
-
-        //            Byte[] txt3 = new UTF8Encoding(true).GetBytes(authenticate_ret.token + "\n");
-        //            fs.Write(txt3, 0, txt3.Length);
-
-        //            Byte[] img = new UTF8Encoding(true).GetBytes(authenticate_ret.user_image + "\n");
-        //            fs.Write(img, 0, img.Length);
-
-        //        }
-
-        //        //using (StreamReader sr = File.OpenText(fileName))
-        //        //{
-        //        //    string s = "";
-        //        //    while ((s = sr.ReadLine()) != null)
-        //        //    {
-        //        //        Console.WriteLine(s);
-        //        //    }
-        //        //}
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        Console.WriteLine(Ex.ToString());
-        //    }
-        //}
-
 
         public static string _tk = "";
         public static string san = "";
@@ -170,54 +130,6 @@ namespace TicketClientApp
         {
             textBox1.Text = "نام کاربری...";
             textBox2.Text = "رمز عبور...";
-
-
-            //string fileName = Application.StartupPath + "\\temp.txt";
-            //FileInfo fi = new FileInfo(fileName);
-
-            //if (fi.Exists)
-            //{
-            //    using (StreamReader sr = File.OpenText(fileName))
-            //    {
-            //        string user_san = "";
-            //        string user_cn = "";
-            //        string token = "";
-            //        string user_image = "";
-
-            //        string line1 = sr.ReadLine();
-            //        if (line1 != null)
-            //        {
-            //            user_san = ClsFuncs.DESDecrypt(line1);
-
-            //            string line2 = sr.ReadLine();
-            //            if (line2 != null)
-            //            {
-            //                user_cn = ClsFuncs.DESDecrypt(line2);
-
-
-            //                string line3 = sr.ReadLine();
-            //                if (line3 != null)
-            //                {
-
-            //                    token = line3;
-
-            //                    string line4 = sr.ReadLine();
-            //                    if (line4 != null)
-            //                        user_image = line4;
-
-            //                    _tk = token;
-            //                    san = user_san;
-            //                    cn = user_cn;
-            //                    img = user_image;
-
-            //                    this.Hide();
-            //                    Form1 frm = new Form1();
-            //                    frm.Show();
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
 
         }
 

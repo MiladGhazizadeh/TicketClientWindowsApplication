@@ -57,7 +57,7 @@ namespace TicketClientApp.TicketWebService {
         
         /// <remarks/>
         public AD_AuthenticateWebService() {
-            this.Url = global::TicketClientApp.Properties.Settings.Default.TicketClientApp_TicketWebService_AD_AuthenticateWebService;
+            this.Url = global::TicketClientApp.Properties.Settings.Default.WindowsFormsApp1_TicketWebService_AD_AuthenticateWebService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

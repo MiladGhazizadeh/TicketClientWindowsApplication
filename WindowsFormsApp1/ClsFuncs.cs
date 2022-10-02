@@ -44,16 +44,13 @@ namespace TicketClientApp
                 Encoding encoding = Encoding.UTF8; return encoding.GetString(ms.ToArray());
             }
 
-            catch (System.Exception ex)
+            catch
             {
                 //return ex.Message;
                 return "ExeptionError";
                 //throw ex;
             }
 
-            //catch
-            //{
-            //}
 
         }
 
@@ -118,7 +115,7 @@ namespace TicketClientApp
                     fi.Delete();
                 }
 
-                
+
                 // Create a new file     
                 //using (FileStream fs = fi.Create())
                 using (FileStream fs = File.Create(fileName))
@@ -144,5 +141,25 @@ namespace TicketClientApp
             }
         }
 
+        public static void DeleteFiles_for_BeforeInstalation()
+        {
+
+            string fileName = Application.StartupPath + "\\config.txt";
+            FileInfo fi = new FileInfo(fileName);
+
+            // Check if file already exists. If yes, delete it.     
+            if (fi.Exists)
+            {
+                string fileName2 = Application.StartupPath + "\\temp.txt";
+                FileInfo fi2 = new FileInfo(fileName2);
+                if (fi2.Exists)
+                    fi2.Delete();
+
+
+                fi.Delete();
+            }
+
+
+        }
     }
 }

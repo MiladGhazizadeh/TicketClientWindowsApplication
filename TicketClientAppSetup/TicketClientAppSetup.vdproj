@@ -15,19 +15,25 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_5D642DA2F84241E7955501D2B61C2837"
+        "MsmKey" = "8:_0AEDAD1535F044E8B8C5F5CC0FF41DB0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7E74C6EF0D564610908FF60EE31E9E5A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_894C577BD14819C971423B24C04C917F"
-        "OwnerKey" = "8:_A9C6DC2C434B489DA064520BE4D6D1E8"
+        "OwnerKey" = "8:_7E74C6EF0D564610908FF60EE31E9E5A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A9C6DC2C434B489DA064520BE4D6D1E8"
+        "MsmKey" = "8:_DBDD2050DB434C84B7789BC20463E445"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -40,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A9C6DC2C434B489DA064520BE4D6D1E8"
+        "OwnerKey" = "8:_7E74C6EF0D564610908FF60EE31E9E5A"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -61,6 +67,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -77,6 +99,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -106,10 +144,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D642DA2F84241E7955501D2B61C2837"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0AEDAD1535F044E8B8C5F5CC0FF41DB0"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\Desktop\\chat_32.ico"
-            "TargetName" = "8:chat_32.ico"
+            "SourcePath" = "8:..\\WindowsFormsApp1\\Resources\\config.txt"
+            "TargetName" = "8:config.txt"
             "Tag" = "8:"
             "Folder" = "8:_C5FBEBF36C90409EBD5D7F8278196864"
             "Condition" = "8:"
@@ -157,6 +195,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBDD2050DB434C84B7789BC20463E445"
+            {
+            "SourcePath" = "8:..\\WindowsFormsApp1\\Resources\\chat_96.ico"
+            "TargetName" = "8:chat_96.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_C5FBEBF36C90409EBD5D7F8278196864"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -177,7 +235,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_AF529583258A4A7BA7DDF099B3EBFEAF"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:TRUE"
+            "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -189,7 +247,7 @@
             {
             "DefaultLocation" = "8:C:\\[Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
-            "AlwaysCreate" = "11:TRUE"
+            "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
@@ -214,7 +272,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TicketClientAppSetup"
         "ProductCode" = "8:{BE6DA501-A8C4-49A0-BC17-ED9B6AE9CCCB}"
-        "PackageCode" = "8:{23331CCB-3229-41C3-840B-AF2598197EE0}"
+        "PackageCode" = "8:{F787D437-389B-4191-9F58-54EB72959CD6}"
         "UpgradeCode" = "8:{16E68F96-8902-4B46-8E14-4033E8B7AE31}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -334,20 +392,6 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_0519D137E91D4C63B85C048207C538D0"
-            {
-            "Name" = "8:TicketClientApp"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_A9C6DC2C434B489DA064520BE4D6D1E8"
-            "Folder" = "8:_AF529583258A4A7BA7DDF099B3EBFEAF"
-            "WorkingFolder" = "8:_C5FBEBF36C90409EBD5D7F8278196864"
-            "Icon" = "8:_5D642DA2F84241E7955501D2B61C2837"
-            "Feature" = "8:"
-            }
         }
         "UserInterface"
         {
@@ -747,7 +791,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A9C6DC2C434B489DA064520BE4D6D1E8"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7E74C6EF0D564610908FF60EE31E9E5A"
             {
             "SourcePath" = "8:..\\WindowsFormsApp1\\obj\\Debug\\TicketClientApp.exe"
             "TargetName" = "8:"

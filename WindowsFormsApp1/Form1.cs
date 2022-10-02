@@ -73,7 +73,11 @@ namespace TicketClientApp
             gp2.AddEllipse(pictureBox1.DisplayRectangle);
             pictureBox1.Region = new Region(gp2);
 
+
+
+            //CreateContextMenu();
         }
+      
 
         private void LoadMessageFromWebsercice()
         {
@@ -233,22 +237,44 @@ namespace TicketClientApp
                     {
                         #region ziroMessages
 
-                        Label lbl_ziroMessages = new Label();
-                        // 
-                        // lbl_ziroMessages
-                        // 
-                        lbl_ziroMessages.Dock = System.Windows.Forms.DockStyle.Top;
-                        lbl_ziroMessages.Font = new System.Drawing.Font("B Mitra", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-                        lbl_ziroMessages.ForeColor = System.Drawing.Color.LimeGreen;
-                        lbl_ziroMessages.Location = new System.Drawing.Point(0, 0);
-                        lbl_ziroMessages.Name = "lbl_ziroMessages";
-                        lbl_ziroMessages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-                        lbl_ziroMessages.Size = new System.Drawing.Size(294, 36);
-                        lbl_ziroMessages.TabIndex = 0;
-                        lbl_ziroMessages.Text = "پیام  جدیدی یافت نگردید";
-                        lbl_ziroMessages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                        //Label lbl_ziroMessages = new Label();
+                        //// 
+                        //// lbl_ziroMessages
+                        //// 
+                        //lbl_ziroMessages.Dock = System.Windows.Forms.DockStyle.Top;
+                        //lbl_ziroMessages.Font = new System.Drawing.Font("B Mitra", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+                        //lbl_ziroMessages.ForeColor = System.Drawing.Color.LimeGreen;
+                        //lbl_ziroMessages.Location = new System.Drawing.Point(0, 0);
+                        //lbl_ziroMessages.Name = "lbl_ziroMessages";
+                        //lbl_ziroMessages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+                        //lbl_ziroMessages.Size = new System.Drawing.Size(294, 36);
+                        //lbl_ziroMessages.TabIndex = 0;
+                        //lbl_ziroMessages.Text = "پیام جدیدی یافت نگردید";
+                        //lbl_ziroMessages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
-                        pnlMessages.Controls.Add(lbl_ziroMessages);
+                        flowLayoutPanel1.Controls.Clear();
+                        // 
+                        // linkLabel_ziroMessages
+                        // 
+                        LinkLabel linkLabel_ziroMessages1 = new LinkLabel();
+                        linkLabel_ziroMessages1.Font = new Font("B Mitra", 12F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(178)));
+                        linkLabel_ziroMessages1.Location = new Point(3, 0);
+                        linkLabel_ziroMessages1.Name = "linkLabel_ziroMessages";
+                        linkLabel_ziroMessages1.Size = new Size(304, 36);
+                        linkLabel_ziroMessages1.TabIndex = 0;
+                        linkLabel_ziroMessages1.TabStop = true;
+                        //linkLabel_ziroMessages1.LinkColor = Color.MediumSeaGreen;
+
+                        linkLabel_ziroMessages1.BackColor = Color.MediumSeaGreen;
+                        linkLabel_ziroMessages1.LinkColor = Color.White;
+                        //linkLabel_ziroMessages1.Padding = new Padding(2);
+
+                        linkLabel_ziroMessages1.Text = "پیام جدیدی یافت نگردید.";
+                        linkLabel_ziroMessages1.TextAlign =ContentAlignment.MiddleCenter;
+                        linkLabel_ziroMessages1.LinkClicked += new LinkLabelLinkClickedEventHandler(linkLabel_ziroMessages_LinkClicked);
+
+
+                        flowLayoutPanel1.Controls.Add(linkLabel_ziroMessages1);
 
                         #endregion
                     }
@@ -662,7 +688,7 @@ namespace TicketClientApp
                 this.WindowState = FormWindowState.Minimized;
 
             }
-            catch (Exception ex)
+            catch
             {
                 MessageBox.Show("Unable to open link that was clicked.");
             }
@@ -730,6 +756,23 @@ namespace TicketClientApp
 
         }
 
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
 
+        private void btn_cms_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void linkLabel_ziroMessages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            string url = "https://ticket.nkums.ac.ir/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk;
+            System.Diagnostics.Process.Start(url);
+
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

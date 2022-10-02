@@ -32,5 +32,15 @@ namespace TicketClientApp.Properties {
                 return ((string)(this["TicketClientApp_TicketWebService_AD_AuthenticateWebService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ticket.nkums.ac.ir/AD_AuthenticateWebService.asmx")]
+        public string WindowsFormsApp1_TicketWebService_AD_AuthenticateWebService {
+            get {
+                return ((string)(this["WindowsFormsApp1_TicketWebService_AD_AuthenticateWebService"]));
+            }
+        }
     }
 }
