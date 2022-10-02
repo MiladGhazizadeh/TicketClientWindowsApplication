@@ -50,10 +50,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.contextMenuStrip1.SuspendLayout();
             this.pnlMessages.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -94,18 +92,17 @@
             this.pnlMessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlMessages.Location = new System.Drawing.Point(0, 126);
             this.pnlMessages.Name = "pnlMessages";
-            this.pnlMessages.Size = new System.Drawing.Size(310, 412);
+            this.pnlMessages.Size = new System.Drawing.Size(306, 408);
             this.pnlMessages.TabIndex = 4;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.linkLabel1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(310, 412);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(306, 408);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // timer1
@@ -121,7 +118,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(310, 126);
+            this.panel5.Size = new System.Drawing.Size(306, 126);
             this.panel5.TabIndex = 7;
             // 
             // panel6
@@ -132,7 +129,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 85);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(310, 35);
+            this.panel6.Size = new System.Drawing.Size(306, 35);
             this.panel6.TabIndex = 7;
             // 
             // panel4
@@ -141,7 +138,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(310, 2);
+            this.panel4.Size = new System.Drawing.Size(306, 2);
             this.panel4.TabIndex = 3;
             // 
             // panel1
@@ -150,7 +147,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 33);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(310, 2);
+            this.panel1.Size = new System.Drawing.Size(306, 2);
             this.panel1.TabIndex = 2;
             // 
             // label2
@@ -173,7 +170,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(310, 58);
+            this.panel2.Size = new System.Drawing.Size(306, 58);
             this.panel2.TabIndex = 6;
             // 
             // button2
@@ -202,7 +199,7 @@
             // 
             this.panel3.Controls.Add(this.pictureBox1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(242, 0);
+            this.panel3.Location = new System.Drawing.Point(238, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(68, 58);
             this.panel3.TabIndex = 0;
@@ -226,7 +223,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(310, 27);
+            this.panel7.Size = new System.Drawing.Size(306, 27);
             this.panel7.TabIndex = 0;
             // 
             // label1
@@ -253,7 +250,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::TicketClientApp.Properties.Resources.close_blue5_48;
-            this.pictureBox2.Location = new System.Drawing.Point(285, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(282, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 20);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -261,24 +258,11 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.BackColor = System.Drawing.Color.MediumSeaGreen;
-            this.linkLabel1.LinkColor = System.Drawing.Color.White;
-            this.linkLabel1.Padding = new System.Windows.Forms.Padding(5);
-            this.linkLabel1.Location = new System.Drawing.Point(224, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(83, 31);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "linkLabel1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 538);
+            this.ClientSize = new System.Drawing.Size(306, 534);
             this.ControlBox = false;
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.pnlMessages);
@@ -296,8 +280,6 @@
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             this.pnlMessages.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -333,7 +315,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem btn_cms_exit;
-        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 
