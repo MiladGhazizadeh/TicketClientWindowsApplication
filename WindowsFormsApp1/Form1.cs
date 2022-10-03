@@ -77,11 +77,11 @@ namespace TicketClientApp
 
             //CreateContextMenu();
         }
-      
+
 
         private void LoadMessageFromWebsercice()
         {
-            bool ExeptionError = false;
+            bool TicketServerConnectionError = false;
 
             string fileName = Application.StartupPath + "\\temp.txt";
             FileInfo fi = new FileInfo(fileName);
@@ -128,25 +128,33 @@ namespace TicketClientApp
 
                                         if (!String.IsNullOrEmpty(user_image))
                                         {
-                                            string sURL = "https://ticket.nkums.ac.ir/get_file.aspx?fn=" + user_image + "&width=200";
-
-                                            WebRequest req = WebRequest.Create(sURL);
-
-                                            WebResponse res = req.GetResponse();
-
-                                            Stream imgStream = res.GetResponseStream();
-
                                             try
                                             {
+
+                                                string sURL = "https://ticket.nkums.ac.ir/get_file.aspx?fn=" + user_image + "&width=200";
+
+                                                WebRequest req = WebRequest.Create(sURL);
+
+                                                WebResponse res = req.GetResponse();
+
+                                                Stream imgStream = res.GetResponseStream();
+
+
                                                 Image img1 = Image.FromStream(imgStream);
                                                 imgStream.Close();
                                                 pictureBox1.Image = img1;
-                                            }
-                                            catch (Exception)
-                                            {
-                                                ExeptionError = true;
-                                            }
 
+
+
+                                            }
+                                            catch (Exception em)
+                                            {
+                                                if (em.Message.Contains("The remote name could not be resolved"))
+                                                {
+                                                    TicketServerConnectionError = true;
+                                                }
+                                                pictureBox1.Image = global::TicketClientApp.Properties.Resources.user;
+                                            }
 
                                         }
                                         else
@@ -154,13 +162,40 @@ namespace TicketClientApp
 
                                         #endregion
 
-                                        if (!ExeptionError)
+                                        if (!TicketServerConnectionError)
                                         {
                                             CurrentLineItems = LoadMessages(token);
 
                                             timer1.Enabled = true;
                                         }
+                                        else
+                                        {
+                                            #region TicketServerConnectionError message
 
+                                            flowLayoutPanel1.Controls.Clear();
+
+                                            Label lbl_connectionError = new Label();
+                                            // 
+                                            // lbl_connectionError
+                                            // 
+                                            lbl_connectionError.BackColor = Color.OrangeRed;
+                                            lbl_connectionError.Font = new Font("B Mitra", 11F,FontStyle.Bold, GraphicsUnit.Point, ((byte)(178)));
+                                            lbl_connectionError.ForeColor = Color.White;
+                                            lbl_connectionError.Location = new Point(3, 15);
+                                            lbl_connectionError.Name = "lbl_connectionError";
+                                            lbl_connectionError.Padding = new Padding(8, 0, 8, 0);
+                                            lbl_connectionError.Size = new Size(292, 111);
+                                            lbl_connectionError.TabIndex = 0;
+                                            lbl_connectionError.Text = "متاسفانه ارتباط برنامه با سرور سامانه تیکت میسر نمی باشد. لطفا اتصال سیستم خود به" +
+                                                " اینترنت را بررسی نمایید";
+                                            lbl_connectionError.TextAlign = ContentAlignment.MiddleCenter;
+
+                                            flowLayoutPanel1.Controls.Add(lbl_connectionError);
+
+                                            timer_connectionError.Enabled = true;
+
+                                            #endregion
+                                        }
 
                                     }
 
@@ -168,7 +203,13 @@ namespace TicketClientApp
                             }
                             else
                             {
-                                ExeptionError = true;
+                                //ExeptionError = true;
+
+                                fi.Delete();
+
+                                DialogResult d = MessageBox.Show("متاسفانه اختلالی در تنظیمات کاربری شما رخ داده است، لطفا مجددا لاگین فرمایید.", "خطای تنظیمات کاربری", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                if (d == DialogResult.OK)
+                                    Application.Exit();
                             }
                         }
                     }
@@ -182,15 +223,15 @@ namespace TicketClientApp
             }
 
 
-            if (ExeptionError)
-            {
-                fi.Delete();
+            //if (ExeptionError)
+            //{
+            //    fi.Delete();
 
-                DialogResult d = MessageBox.Show("متاسفانه اختلالی در تنظیمات کاربری شما رخ داده است، لطفا مجددا لاگین فرمایید.", "خطای تنظیمات کاربری", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (d == DialogResult.OK)
-                    Application.Exit();
+            //    DialogResult d = MessageBox.Show("متاسفانه اختلالی در تنظیمات کاربری شما رخ داده است، لطفا مجددا لاگین فرمایید.", "خطای تنظیمات کاربری", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    if (d == DialogResult.OK)
+            //        Application.Exit();
 
-            }
+            //}
 
         }
 
@@ -237,22 +278,8 @@ namespace TicketClientApp
                     {
                         #region ziroMessages
 
-                        //Label lbl_ziroMessages = new Label();
-                        //// 
-                        //// lbl_ziroMessages
-                        //// 
-                        //lbl_ziroMessages.Dock = System.Windows.Forms.DockStyle.Top;
-                        //lbl_ziroMessages.Font = new System.Drawing.Font("B Mitra", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-                        //lbl_ziroMessages.ForeColor = System.Drawing.Color.LimeGreen;
-                        //lbl_ziroMessages.Location = new System.Drawing.Point(0, 0);
-                        //lbl_ziroMessages.Name = "lbl_ziroMessages";
-                        //lbl_ziroMessages.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-                        //lbl_ziroMessages.Size = new System.Drawing.Size(294, 36);
-                        //lbl_ziroMessages.TabIndex = 0;
-                        //lbl_ziroMessages.Text = "پیام جدیدی یافت نگردید";
-                        //lbl_ziroMessages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
                         flowLayoutPanel1.Controls.Clear();
+
                         // 
                         // linkLabel_ziroMessages
                         // 
@@ -270,7 +297,7 @@ namespace TicketClientApp
                         //linkLabel_ziroMessages1.Padding = new Padding(2);
 
                         linkLabel_ziroMessages1.Text = "پیام جدیدی یافت نگردید.";
-                        linkLabel_ziroMessages1.TextAlign =ContentAlignment.MiddleCenter;
+                        linkLabel_ziroMessages1.TextAlign = ContentAlignment.MiddleCenter;
                         linkLabel_ziroMessages1.LinkClicked += new LinkLabelLinkClickedEventHandler(linkLabel_ziroMessages_LinkClicked);
 
 
@@ -364,7 +391,7 @@ namespace TicketClientApp
             pnl_msgContainer.Dock = DockStyle.Top;
             pnl_msgContainer.Location = new Point(10, location_y);
             pnl_msgContainer.Name = "pnl_msgContainer_" + i;
-            pnl_msgContainer.Size = new Size(290, height);
+            pnl_msgContainer.Size = new Size(243, height);
             pnl_msgContainer.TabIndex = 1;
             pnl_msgContainer.Controls.Add(lbl_bottom_line_left);
             pnl_msgContainer.Controls.Add(lbl_msg_count);
@@ -389,7 +416,7 @@ namespace TicketClientApp
             lbl_msg_count.Name = "lbl_msg_count_" + i;
             lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
             lbl_msg_count.RightToLeft = RightToLeft.Yes;
-            lbl_msg_count.Size = new Size(178, 24);
+            lbl_msg_count.Size = new Size(140, 24);
             lbl_msg_count.TabIndex = 3;
             lbl_msg_count.TabStop = true;
             lbl_msg_count.Tag = item.SenderIsAGroup + "_" + item.Sender + "_" + i + "_" + item.SenderIsAPool;
@@ -418,7 +445,7 @@ namespace TicketClientApp
             lbl_sender_cn.ForeColor = Color.SteelBlue;
             lbl_sender_cn.Location = new Point(0, 0);
             lbl_sender_cn.Name = "lbl_sender_cn_" + i;
-            lbl_sender_cn.Size = new Size(227, 32);
+            lbl_sender_cn.Size = new Size(190, 32);
             lbl_sender_cn.TabIndex = 1;
             lbl_sender_cn.RightToLeft = RightToLeft.Yes;
             lbl_sender_cn.TextAlign = ContentAlignment.MiddleLeft;
@@ -433,7 +460,7 @@ namespace TicketClientApp
             pnl_senderImage_container.BackColor = SystemColors.ButtonFace;
             pnl_senderImage_container.Dock = DockStyle.Right;
             pnl_senderImage_container.Padding = new System.Windows.Forms.Padding(0);
-            pnl_senderImage_container.Location = new Point(232, 0);
+            pnl_senderImage_container.Location = new Point(192, 0);
             pnl_senderImage_container.Name = "pnl_senderImage_container_" + i;
             pnl_senderImage_container.Size = new Size(55, height);
             pnl_senderImage_container.TabIndex = 0;
@@ -497,12 +524,13 @@ namespace TicketClientApp
 
             if (!HasScroll)
             {
-                #region CREATE CONTROLS CONSIDER SCROLL
+                #region CREATE CONTROLS CONSIDER NO SCROLL
 
                 //pnl_msgContainer.Location = new Point(10, location_y);
                 //pnl_msgContainer.Size = new Size(290, height);
                 pnl_msgContainer.Location = new Point(0, location_y);
-                pnl_msgContainer.Size = new Size(300, height);
+
+                pnl_msgContainer.Size = new Size(260, height);
 
 
                 //lbl_bottom_line_left.Location = new Point(10, 58);
@@ -517,20 +545,20 @@ namespace TicketClientApp
                 //lbl_msg_count.Size = new Size(178, 24);
                 lbl_msg_count.Location = new Point(60, 30);
                 lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
-                lbl_msg_count.Size = new Size(178, 24);
+                lbl_msg_count.Size = new Size(150, 24);
 
 
 
                 //lbl_sender_cn.Location = new Point(0, 0);
                 //lbl_sender_cn.Size = new Size(227, 32);
                 lbl_sender_cn.Location = new Point(0, 0);
-                lbl_sender_cn.Size = new Size(227, 32);
+                lbl_sender_cn.Size = new Size(207, 32);
 
 
 
                 //pnl_senderImage_container.Location = new Point(232, 0);
                 //pnl_senderImage_container.Size = new Size(55, height);
-                pnl_senderImage_container.Location = new Point(232, 0);
+                pnl_senderImage_container.Location = new Point(202, 0);
                 pnl_senderImage_container.Size = new Size(65, height);
 
 
@@ -547,6 +575,62 @@ namespace TicketClientApp
                 //pictureBox_sender_img.Size = new Size(50, 50);
                 pictureBox_sender_img.Location = new Point(5, 1);
                 pictureBox_sender_img.Size = new Size(50, 50);
+
+
+                #endregion
+
+
+
+                #region BC ---- CREATE CONTROLS CONSIDER NO SCROLL 
+
+                ////pnl_msgContainer.Location = new Point(10, location_y);
+                ////pnl_msgContainer.Size = new Size(290, height);
+                //pnl_msgContainer.Location = new Point(0, location_y);
+                //pnl_msgContainer.Size = new Size(300, height);
+
+
+                ////lbl_bottom_line_left.Location = new Point(10, 58);
+                ////lbl_bottom_line_left.Size = new Size(227, 1);
+                //lbl_bottom_line_left.Location = new Point(0, 58);
+                //lbl_bottom_line_left.Size = new Size(237, 1);
+
+
+
+                ////lbl_msg_count.Location = new Point(50, 30);
+                ////lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
+                ////lbl_msg_count.Size = new Size(178, 24);
+                //lbl_msg_count.Location = new Point(60, 30);
+                //lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
+                //lbl_msg_count.Size = new Size(178, 24);
+
+
+
+                ////lbl_sender_cn.Location = new Point(0, 0);
+                ////lbl_sender_cn.Size = new Size(227, 32);
+                //lbl_sender_cn.Location = new Point(0, 0);
+                //lbl_sender_cn.Size = new Size(227, 32);
+
+
+
+                ////pnl_senderImage_container.Location = new Point(232, 0);
+                ////pnl_senderImage_container.Size = new Size(55, height);
+                //pnl_senderImage_container.Location = new Point(232, 0);
+                //pnl_senderImage_container.Size = new Size(65, height);
+
+
+
+                ////lbl_bottom_line_right.Location = new Point(0, 58);
+                ////lbl_bottom_line_right.Size = new Size(67, 1);
+                //lbl_bottom_line_right.Location = new Point(0, 58);
+                //lbl_bottom_line_right.Size = new Size(67, 1);
+
+
+
+
+                ////pictureBox_sender_img.Location = new Point(0, 1);
+                ////pictureBox_sender_img.Size = new Size(50, 50);
+                //pictureBox_sender_img.Location = new Point(5, 1);
+                //pictureBox_sender_img.Size = new Size(50, 50);
 
 
                 #endregion
@@ -774,5 +858,11 @@ namespace TicketClientApp
 
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void timer_connectionError_Tick(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
