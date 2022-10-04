@@ -73,7 +73,7 @@ namespace TicketClientApp
             gp2.AddEllipse(pictureBox1.DisplayRectangle);
             pictureBox1.Region = new Region(gp2);
 
-
+            pnlMessages.Height = 382;
 
             //CreateContextMenu();
         }
@@ -83,7 +83,7 @@ namespace TicketClientApp
         {
             bool TicketServerConnectionError = false;
 
-            string fileName = Application.StartupPath + "\\temp.txt";
+            string fileName = Application.StartupPath + "\\Ticket.txt";
             FileInfo fi = new FileInfo(fileName);
 
             if (fi.Exists)
@@ -153,6 +153,7 @@ namespace TicketClientApp
                                                 {
                                                     TicketServerConnectionError = true;
                                                 }
+
                                                 pictureBox1.Image = global::TicketClientApp.Properties.Resources.user;
                                             }
 
@@ -179,12 +180,12 @@ namespace TicketClientApp
                                             // lbl_connectionError
                                             // 
                                             lbl_connectionError.BackColor = Color.OrangeRed;
-                                            lbl_connectionError.Font = new Font("B Mitra", 11F,FontStyle.Bold, GraphicsUnit.Point, ((byte)(178)));
+                                            lbl_connectionError.Font = new Font("B Mitra", 11F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(178)));
                                             lbl_connectionError.ForeColor = Color.White;
                                             lbl_connectionError.Location = new Point(3, 15);
                                             lbl_connectionError.Name = "lbl_connectionError";
                                             lbl_connectionError.Padding = new Padding(8, 0, 8, 0);
-                                            lbl_connectionError.Size = new Size(292, 111);
+                                            lbl_connectionError.Size = new Size(240, 111);
                                             lbl_connectionError.TabIndex = 0;
                                             lbl_connectionError.Text = "متاسفانه ارتباط برنامه با سرور سامانه تیکت میسر نمی باشد. لطفا اتصال سیستم خود به" +
                                                 " اینترنت را بررسی نمایید";
@@ -205,7 +206,9 @@ namespace TicketClientApp
                             {
                                 //ExeptionError = true;
 
-                                fi.Delete();
+                                //fi.Delete();
+
+                                System.IO.File.WriteAllText(fileName, String.Empty);
 
                                 DialogResult d = MessageBox.Show("متاسفانه اختلالی در تنظیمات کاربری شما رخ داده است، لطفا مجددا لاگین فرمایید.", "خطای تنظیمات کاربری", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 if (d == DialogResult.OK)
@@ -258,16 +261,20 @@ namespace TicketClientApp
                 if (!String.IsNullOrEmpty(Service_retval.Msg))
                 {
                     DialogResult d = MessageBox.Show(Service_retval.Msg, "بروز خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (d == DialogResult.OK)
+                    //if (d == DialogResult.OK)
+                    //{
+                    string fileName = Application.StartupPath + "\\Ticket.txt";
+                    FileInfo fi = new FileInfo(fileName);
+
+                    if (fi.Exists)
                     {
-                        string fileName = Application.StartupPath + "\\temp.txt";
-                        FileInfo fi = new FileInfo(fileName);
+                        //fi.Delete();
 
-                        if (fi.Exists)
-                            fi.Delete();
-
-                        Application.Exit();
+                        System.IO.File.WriteAllText(fileName, String.Empty);
                     }
+
+                    Application.Restart();
+                    //}
                 }
                 else
                 {
@@ -287,7 +294,7 @@ namespace TicketClientApp
                         linkLabel_ziroMessages1.Font = new Font("B Mitra", 12F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(178)));
                         linkLabel_ziroMessages1.Location = new Point(3, 0);
                         linkLabel_ziroMessages1.Name = "linkLabel_ziroMessages";
-                        linkLabel_ziroMessages1.Size = new Size(304, 36);
+                        linkLabel_ziroMessages1.Size = new Size(240, 36);
                         linkLabel_ziroMessages1.TabIndex = 0;
                         linkLabel_ziroMessages1.TabStop = true;
                         //linkLabel_ziroMessages1.LinkColor = Color.MediumSeaGreen;
@@ -342,7 +349,11 @@ namespace TicketClientApp
 
             }
             else
+            {
                 MessageBox.Show("عدم خروجی وب سرویس", "بروز خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Application.Exit();
+            }
 
 
             return lstRet;
@@ -391,7 +402,7 @@ namespace TicketClientApp
             pnl_msgContainer.Dock = DockStyle.Top;
             pnl_msgContainer.Location = new Point(10, location_y);
             pnl_msgContainer.Name = "pnl_msgContainer_" + i;
-            pnl_msgContainer.Size = new Size(243, height);
+            pnl_msgContainer.Size = new Size(222, height);
             pnl_msgContainer.TabIndex = 1;
             pnl_msgContainer.Controls.Add(lbl_bottom_line_left);
             pnl_msgContainer.Controls.Add(lbl_msg_count);
@@ -402,7 +413,7 @@ namespace TicketClientApp
             // 
             lbl_bottom_line_left.BackColor = Color.Goldenrod;
             lbl_bottom_line_left.Dock = DockStyle.Bottom;
-            lbl_bottom_line_left.Location = new Point(10, 58);
+            lbl_bottom_line_left.Location = new Point(0, 58);
             lbl_bottom_line_left.Name = "lbl_bottom_line_left_" + i;
             lbl_bottom_line_left.Size = new Size(227, 1);
             lbl_bottom_line_left.TabIndex = 2;
@@ -412,11 +423,11 @@ namespace TicketClientApp
             lbl_msg_count.Cursor = Cursors.Hand;
             lbl_msg_count.Font = new Font("B Mitra", 11F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(178)));
             lbl_msg_count.LinkBehavior = LinkBehavior.NeverUnderline;
-            lbl_msg_count.Location = new Point(50, 30);
+            lbl_msg_count.Location = new Point(33, 30);
             lbl_msg_count.Name = "lbl_msg_count_" + i;
             lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
             lbl_msg_count.RightToLeft = RightToLeft.Yes;
-            lbl_msg_count.Size = new Size(140, 24);
+            lbl_msg_count.Size = new Size(138, 24);
             lbl_msg_count.TabIndex = 3;
             lbl_msg_count.TabStop = true;
             lbl_msg_count.Tag = item.SenderIsAGroup + "_" + item.Sender + "_" + i + "_" + item.SenderIsAPool;
@@ -445,7 +456,7 @@ namespace TicketClientApp
             lbl_sender_cn.ForeColor = Color.SteelBlue;
             lbl_sender_cn.Location = new Point(0, 0);
             lbl_sender_cn.Name = "lbl_sender_cn_" + i;
-            lbl_sender_cn.Size = new Size(190, 32);
+            lbl_sender_cn.Size = new Size(170, 32);
             lbl_sender_cn.TabIndex = 1;
             lbl_sender_cn.RightToLeft = RightToLeft.Yes;
             lbl_sender_cn.TextAlign = ContentAlignment.MiddleLeft;
@@ -460,7 +471,7 @@ namespace TicketClientApp
             pnl_senderImage_container.BackColor = SystemColors.ButtonFace;
             pnl_senderImage_container.Dock = DockStyle.Right;
             pnl_senderImage_container.Padding = new System.Windows.Forms.Padding(0);
-            pnl_senderImage_container.Location = new Point(192, 0);
+            pnl_senderImage_container.Location = new Point(170, 0);
             pnl_senderImage_container.Name = "pnl_senderImage_container_" + i;
             pnl_senderImage_container.Size = new Size(55, height);
             pnl_senderImage_container.TabIndex = 0;
@@ -522,119 +533,7 @@ namespace TicketClientApp
 
             #endregion
 
-            if (!HasScroll)
-            {
-                #region CREATE CONTROLS CONSIDER NO SCROLL
 
-                //pnl_msgContainer.Location = new Point(10, location_y);
-                //pnl_msgContainer.Size = new Size(290, height);
-                pnl_msgContainer.Location = new Point(0, location_y);
-
-                pnl_msgContainer.Size = new Size(260, height);
-
-
-                //lbl_bottom_line_left.Location = new Point(10, 58);
-                //lbl_bottom_line_left.Size = new Size(227, 1);
-                lbl_bottom_line_left.Location = new Point(0, 58);
-                lbl_bottom_line_left.Size = new Size(237, 1);
-
-
-
-                //lbl_msg_count.Location = new Point(50, 30);
-                //lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
-                //lbl_msg_count.Size = new Size(178, 24);
-                lbl_msg_count.Location = new Point(60, 30);
-                lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
-                lbl_msg_count.Size = new Size(150, 24);
-
-
-
-                //lbl_sender_cn.Location = new Point(0, 0);
-                //lbl_sender_cn.Size = new Size(227, 32);
-                lbl_sender_cn.Location = new Point(0, 0);
-                lbl_sender_cn.Size = new Size(207, 32);
-
-
-
-                //pnl_senderImage_container.Location = new Point(232, 0);
-                //pnl_senderImage_container.Size = new Size(55, height);
-                pnl_senderImage_container.Location = new Point(202, 0);
-                pnl_senderImage_container.Size = new Size(65, height);
-
-
-
-                //lbl_bottom_line_right.Location = new Point(0, 58);
-                //lbl_bottom_line_right.Size = new Size(67, 1);
-                lbl_bottom_line_right.Location = new Point(0, 58);
-                lbl_bottom_line_right.Size = new Size(67, 1);
-
-
-
-
-                //pictureBox_sender_img.Location = new Point(0, 1);
-                //pictureBox_sender_img.Size = new Size(50, 50);
-                pictureBox_sender_img.Location = new Point(5, 1);
-                pictureBox_sender_img.Size = new Size(50, 50);
-
-
-                #endregion
-
-
-
-                #region BC ---- CREATE CONTROLS CONSIDER NO SCROLL 
-
-                ////pnl_msgContainer.Location = new Point(10, location_y);
-                ////pnl_msgContainer.Size = new Size(290, height);
-                //pnl_msgContainer.Location = new Point(0, location_y);
-                //pnl_msgContainer.Size = new Size(300, height);
-
-
-                ////lbl_bottom_line_left.Location = new Point(10, 58);
-                ////lbl_bottom_line_left.Size = new Size(227, 1);
-                //lbl_bottom_line_left.Location = new Point(0, 58);
-                //lbl_bottom_line_left.Size = new Size(237, 1);
-
-
-
-                ////lbl_msg_count.Location = new Point(50, 30);
-                ////lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
-                ////lbl_msg_count.Size = new Size(178, 24);
-                //lbl_msg_count.Location = new Point(60, 30);
-                //lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
-                //lbl_msg_count.Size = new Size(178, 24);
-
-
-
-                ////lbl_sender_cn.Location = new Point(0, 0);
-                ////lbl_sender_cn.Size = new Size(227, 32);
-                //lbl_sender_cn.Location = new Point(0, 0);
-                //lbl_sender_cn.Size = new Size(227, 32);
-
-
-
-                ////pnl_senderImage_container.Location = new Point(232, 0);
-                ////pnl_senderImage_container.Size = new Size(55, height);
-                //pnl_senderImage_container.Location = new Point(232, 0);
-                //pnl_senderImage_container.Size = new Size(65, height);
-
-
-
-                ////lbl_bottom_line_right.Location = new Point(0, 58);
-                ////lbl_bottom_line_right.Size = new Size(67, 1);
-                //lbl_bottom_line_right.Location = new Point(0, 58);
-                //lbl_bottom_line_right.Size = new Size(67, 1);
-
-
-
-
-                ////pictureBox_sender_img.Location = new Point(0, 1);
-                ////pictureBox_sender_img.Size = new Size(50, 50);
-                //pictureBox_sender_img.Location = new Point(5, 1);
-                //pictureBox_sender_img.Size = new Size(50, 50);
-
-
-                #endregion
-            }
 
 
             int Notifycount = 0;
@@ -704,7 +603,7 @@ namespace TicketClientApp
                 linkLabel_ajaxNewMsg.Image = global::TicketClientApp.Properties.Resources.newMsg_green;
                 linkLabel_ajaxNewMsg.LinkBehavior = LinkBehavior.NeverUnderline;
                 linkLabel_ajaxNewMsg.LinkColor = Color.White;
-                linkLabel_ajaxNewMsg.Location = new Point(5, 36);
+                linkLabel_ajaxNewMsg.Location = new Point(2, 32);
                 linkLabel_ajaxNewMsg.Name = "linkLabel_ajaxNewMsg_" + i;
                 linkLabel_ajaxNewMsg.Size = new Size(24, 24);
                 linkLabel_ajaxNewMsg.TabIndex = 1;
@@ -718,6 +617,111 @@ namespace TicketClientApp
 
                 ret.PlaySound = true;
             }
+
+
+            if (!HasScroll)
+            {
+                #region CREATE CONTROLS CONSIDER NO SCROLL
+
+                pnl_msgContainer.Location = new Point(0, location_y);
+
+                pnl_msgContainer.Size = new Size(240, height);
+                //pnl_msgContainer.BackColor = Color.Blue;
+
+
+                lbl_bottom_line_left.Location = new Point(0, 58);
+                lbl_bottom_line_left.Size = new Size(190, 1);
+
+
+
+                lbl_msg_count.Location = new Point(38, 30);
+                lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
+                lbl_msg_count.Size = new Size(150, 24);
+                //lbl_msg_count.BackColor = Color.LawnGreen;
+
+
+                lbl_sender_cn.Location = new Point(0, 0);
+                lbl_sender_cn.Size = new Size(186, 32);
+                //lbl_sender_cn.BackColor = Color.Aqua;
+
+
+
+                pnl_senderImage_container.Location = new Point(186, 0);
+                pnl_senderImage_container.Size = new Size(65, height);
+
+
+
+                lbl_bottom_line_right.Location = new Point(0, 58);
+                lbl_bottom_line_right.Size = new Size(67, 1);
+
+
+
+                pictureBox_sender_img.Location = new Point(5, 1);
+                pictureBox_sender_img.Size = new Size(50, 50);
+
+
+                linkLabel_ajaxNewMsg.Location = new Point(5, 31);
+                linkLabel_ajaxNewMsg.Size = new Size(24, 24);
+
+                #endregion
+
+
+
+                #region BC ---- CREATE CONTROLS CONSIDER NO SCROLL 
+
+                ////pnl_msgContainer.Location = new Point(10, location_y);
+                ////pnl_msgContainer.Size = new Size(290, height);
+                //pnl_msgContainer.Location = new Point(0, location_y);
+                //pnl_msgContainer.Size = new Size(300, height);
+
+
+                ////lbl_bottom_line_left.Location = new Point(10, 58);
+                ////lbl_bottom_line_left.Size = new Size(227, 1);
+                //lbl_bottom_line_left.Location = new Point(0, 58);
+                //lbl_bottom_line_left.Size = new Size(237, 1);
+
+
+
+                ////lbl_msg_count.Location = new Point(50, 30);
+                ////lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
+                ////lbl_msg_count.Size = new Size(178, 24);
+                //lbl_msg_count.Location = new Point(60, 30);
+                //lbl_msg_count.Padding = new Padding(0, 0, 0, 4);
+                //lbl_msg_count.Size = new Size(178, 24);
+
+
+
+                ////lbl_sender_cn.Location = new Point(0, 0);
+                ////lbl_sender_cn.Size = new Size(227, 32);
+                //lbl_sender_cn.Location = new Point(0, 0);
+                //lbl_sender_cn.Size = new Size(227, 32);
+
+
+
+                ////pnl_senderImage_container.Location = new Point(232, 0);
+                ////pnl_senderImage_container.Size = new Size(55, height);
+                //pnl_senderImage_container.Location = new Point(232, 0);
+                //pnl_senderImage_container.Size = new Size(65, height);
+
+
+
+                ////lbl_bottom_line_right.Location = new Point(0, 58);
+                ////lbl_bottom_line_right.Size = new Size(67, 1);
+                //lbl_bottom_line_right.Location = new Point(0, 58);
+                //lbl_bottom_line_right.Size = new Size(67, 1);
+
+
+
+
+                ////pictureBox_sender_img.Location = new Point(0, 1);
+                ////pictureBox_sender_img.Size = new Size(50, 50);
+                //pictureBox_sender_img.Location = new Point(5, 1);
+                //pictureBox_sender_img.Size = new Size(50, 50);
+
+
+                #endregion
+            }
+
 
             flowLayoutPanel1.Controls.Add(pnl_msgContainer);
 
@@ -780,12 +784,14 @@ namespace TicketClientApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string fileName = Application.StartupPath + "\\temp.txt";
+            string fileName = Application.StartupPath + "\\Ticket.txt";
             FileInfo fi = new FileInfo(fileName);
 
             if (fi.Exists)
             {
-                fi.Delete();
+                //fi.Delete();
+
+                System.IO.File.WriteAllText(fileName, String.Empty);
             }
 
             Application.Exit();
@@ -794,12 +800,13 @@ namespace TicketClientApp
 
         private void tokenLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string fileName = Application.StartupPath + "\\temp.txt";
+            string fileName = Application.StartupPath + "\\Ticket.txt";
             FileInfo fi = new FileInfo(fileName);
 
             if (fi.Exists)
             {
-                fi.Delete();
+                //fi.Delete();
+                System.IO.File.WriteAllText(fileName, String.Empty);
             }
 
             Application.Exit();
@@ -824,8 +831,6 @@ namespace TicketClientApp
         {
             Application.Exit();
         }
-
-
 
         private void playWave_()
         {
@@ -861,7 +866,20 @@ namespace TicketClientApp
 
         private void timer_connectionError_Tick(object sender, EventArgs e)
         {
+            try
+            {
+                string sURL = "https://ticket.nkums.ac.ir/get_file.aspx?fn=";
 
+                WebRequest req = WebRequest.Create(sURL);
+
+                WebResponse res = req.GetResponse();
+
+                timer_connectionError.Enabled = false;
+                timer1.Enabled = true;
+            }
+            catch
+            {
+            }
         }
 
     }

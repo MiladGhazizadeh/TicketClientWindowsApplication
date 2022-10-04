@@ -217,15 +217,6 @@ namespace TicketClientApp.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string config {
-            get {
-                return ResourceManager.GetString("config", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap minimize48 {
@@ -262,6 +253,15 @@ namespace TicketClientApp.Properties {
             get {
                 object obj = ResourceManager.GetObject("signout24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Ticket {
+            get {
+                return ResourceManager.GetString("Ticket", resourceCulture);
             }
         }
         

@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0AEDAD1535F044E8B8C5F5CC0FF41DB0"
+        "MsmKey" = "8:_5D8AA0CE466E441886480D8890BDFBE8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -40,13 +40,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_894C577BD14819C971423B24C04C917F"
+        "OwnerKey" = "8:_7E74C6EF0D564610908FF60EE31E9E5A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7E74C6EF0D564610908FF60EE31E9E5A"
+        "OwnerKey" = "8:_894C577BD14819C971423B24C04C917F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -144,10 +144,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0AEDAD1535F044E8B8C5F5CC0FF41DB0"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5D8AA0CE466E441886480D8890BDFBE8"
             {
-            "SourcePath" = "8:..\\WindowsFormsApp1\\Resources\\config.txt"
-            "TargetName" = "8:config.txt"
+            "SourcePath" = "8:..\\WindowsFormsApp1\\Resources\\Ticket.txt"
+            "TargetName" = "8:Ticket.txt"
             "Tag" = "8:"
             "Folder" = "8:_C5FBEBF36C90409EBD5D7F8278196864"
             "Condition" = "8:"
@@ -272,7 +272,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TicketClientAppSetup"
         "ProductCode" = "8:{BE6DA501-A8C4-49A0-BC17-ED9B6AE9CCCB}"
-        "PackageCode" = "8:{F787D437-389B-4191-9F58-54EB72959CD6}"
+        "PackageCode" = "8:{00F2FC01-F782-4D2C-A431-8EB9C8298372}"
         "UpgradeCode" = "8:{16E68F96-8902-4B46-8E14-4033E8B7AE31}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -392,6 +392,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A50478CB3F7B4561AAE2C00D90B35E92"
+            {
+            "Name" = "8:TicketClientApp"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_7E74C6EF0D564610908FF60EE31E9E5A"
+            "Folder" = "8:_4563AB7881E14F09859A82DC13CB3C1C"
+            "WorkingFolder" = "8:_C5FBEBF36C90409EBD5D7F8278196864"
+            "Icon" = "8:_DBDD2050DB434C84B7789BC20463E445"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B351FC57767149B68B091723267C1C0F"
+            {
+            "Name" = "8:TicketClientApp"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_7E74C6EF0D564610908FF60EE31E9E5A"
+            "Folder" = "8:_AF529583258A4A7BA7DDF099B3EBFEAF"
+            "WorkingFolder" = "8:_C5FBEBF36C90409EBD5D7F8278196864"
+            "Icon" = "8:_DBDD2050DB434C84B7789BC20463E445"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {

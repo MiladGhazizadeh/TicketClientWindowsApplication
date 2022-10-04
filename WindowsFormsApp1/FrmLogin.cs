@@ -53,7 +53,11 @@ namespace TicketClientApp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            Login();         
+        }
 
+        private void Login()
+        {
             try
             {
 
@@ -78,7 +82,7 @@ namespace TicketClientApp
 
                             if (chk_remind.Checked)
                             {
-                               ClsFuncs.WriteTotextFile(authenticate_ret);
+                                ClsFuncs.WriteTotextFile(authenticate_ret);
 
                                 _tk = token.ToString();
                                 san = authenticate_ret.user_san;
@@ -92,12 +96,13 @@ namespace TicketClientApp
                             }
                             else
                             {
-                                string fileName = Application.StartupPath + "\\temp.txt";
+                                string fileName = Application.StartupPath + "\\Ticket.txt";
                                 FileInfo fi = new FileInfo(fileName);
 
                                 if (fi.Exists)
                                 {
-                                    fi.Delete();
+                                    //fi.Delete();
+                                    System.IO.File.WriteAllText(fileName, String.Empty);
                                 }
 
                             }
@@ -118,7 +123,6 @@ namespace TicketClientApp
                 MessageBox.Show(em.Message, "بروز خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         public static string _tk = "";
         public static string san = "";
@@ -144,7 +148,14 @@ namespace TicketClientApp
         {
             if (e.KeyCode == Keys.Enter)
                 if (!string.IsNullOrEmpty(textBox2.Text.Trim()) && textBox2.Text != "رمز عبور...")
+                {
                     btnLogin.Focus();
+
+                    if (!string.IsNullOrEmpty(textBox1.Text.Trim()) && textBox1.Text != "نام کاربری...")
+                    {
+                        Login();
+                    }
+                }
         }
 
         private void FrmLogin_FormClosed(object sender, FormClosedEventArgs e)

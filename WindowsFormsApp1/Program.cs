@@ -23,7 +23,7 @@ namespace TicketClientApp
 
             if (!result)
             {
-                MessageBox.Show("یک نسخه دیگر از برنامه مورد نظر هم اکنون در حال اجرا میباشد");
+                //MessageBox.Show("یک نسخه دیگر از برنامه مورد نظر هم اکنون در حال اجرا میباشد");
                 return;
             }
             else
@@ -33,19 +33,80 @@ namespace TicketClientApp
 
                 #region MyRegion
 
-                //Application.Run(new Form2());
+                //ClsFuncs.DeleteFiles_for_BeforeInstalation();
+
+                //string fileName = Application.StartupPath + "\\temp.txt";
+                //FileInfo fi = new FileInfo(fileName);
+
+                //if (fi.Exists)
+                //    Application.Run(new Form1());
+                //else
+                //    Application.Run(new FrmLogin());
 
 
-                ClsFuncs.DeleteFiles_for_BeforeInstalation();
+                #endregion
 
-                string fileName = Application.StartupPath + "\\temp.txt";
+                #region determine startup form
+
+                bool exist_autenticate_data = false;
+
+                string fileName = Application.StartupPath + "\\Ticket.txt";
                 FileInfo fi = new FileInfo(fileName);
 
                 if (fi.Exists)
-                    Application.Run(new Form1());
-                else
-                    Application.Run(new FrmLogin());
+                {
+                    using (StreamReader sr = File.OpenText(fileName))
+                    {
+
+                        string user_san = "";
+                        string user_cn = "";
+                        string token = "";
+
+                        string line1 = sr.ReadLine();
+                        if (line1 != null)
+                        {
+                            user_san = ClsFuncs.DESDecrypt(line1);
+
+                            string line2 = sr.ReadLine();
+                            if (line2 != null)
+                            {
+                                user_cn = ClsFuncs.DESDecrypt(line2);
+
+                                if (user_san != "ExeptionError" && user_cn != "ExeptionError")
+                                {
+                                    string line3 = sr.ReadLine();
+                                    if (line3 != null)
+                                    {
+                                        token = line3;
+                                        
+                                        if (!String.IsNullOrEmpty(token))
+                                        {
+                                            exist_autenticate_data = true;
+                                        }
+
+                                    }
+                                }
+                                
+                            }
+                        }
+
+
+                        sr.Close();
+                    }
+
+                    if (exist_autenticate_data)
+                        Application.Run(new Form1());
+                    else
+                        Application.Run(new FrmLogin());
+
+                }else
+                {
+                    MessageBox.Show("please reinstall application");
+                }
+
                 #endregion
+
+                //Application.Run(new FormTest());
             }
 
             //GC.KeepAlive(mutex);
