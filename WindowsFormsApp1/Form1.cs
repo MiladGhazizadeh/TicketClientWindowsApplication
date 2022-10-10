@@ -132,7 +132,7 @@ namespace TicketClientApp
                                             try
                                             {
 
-                                                string sURL = site_url+"/get_file.aspx?fn=" + user_image + "&width=200";
+                                                string sURL = site_url + "/get_file.aspx?fn=" + user_image + "&width=200";
 
                                                 WebRequest req = WebRequest.Create(sURL);
 
@@ -507,19 +507,28 @@ namespace TicketClientApp
 
                 if (!String.IsNullOrEmpty(item.SenderImg))
                 {
-                    string sURL = site_url+"/get_file.aspx?fn=" + item.SenderImg + "&width=200";
+                    try
+                    {
 
-                    WebRequest req = WebRequest.Create(sURL);
+                        string sURL = site_url + "/get_file.aspx?fn=" + item.SenderImg + "&width=200";
 
-                    WebResponse res = req.GetResponse();
+                        WebRequest req = WebRequest.Create(sURL);
 
-                    Stream imgStream = res.GetResponseStream();
+                        WebResponse res = req.GetResponse();
 
-                    Image img1 = Image.FromStream(imgStream);
+                        Stream imgStream = res.GetResponseStream();
 
-                    imgStream.Close();
+                        Image img1 = Image.FromStream(imgStream);
 
-                    pictureBox_sender_img.Image = img1;
+                        imgStream.Close();
+
+                        pictureBox_sender_img.Image = img1;
+
+                    }
+                    catch
+                    {
+                        pictureBox_sender_img.Image = global::TicketClientApp.Properties.Resources.user;
+                    }
                 }
                 else
                 {
