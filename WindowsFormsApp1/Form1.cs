@@ -19,6 +19,7 @@ namespace TicketClientApp
 {
     public partial class Form1 : Form
     {
+        public static string site_url = "https://ticket.nkums.ac.ir";
         public Form1()
         {
             InitializeComponent();
@@ -131,7 +132,7 @@ namespace TicketClientApp
                                             try
                                             {
 
-                                                string sURL = "https://ticket.nkums.ac.ir/get_file.aspx?fn=" + user_image + "&width=200";
+                                                string sURL = site_url+"/get_file.aspx?fn=" + user_image + "&width=200";
 
                                                 WebRequest req = WebRequest.Create(sURL);
 
@@ -506,7 +507,7 @@ namespace TicketClientApp
 
                 if (!String.IsNullOrEmpty(item.SenderImg))
                 {
-                    string sURL = "https://ticket.nkums.ac.ir/get_file.aspx?fn=" + item.SenderImg + "&width=200";
+                    string sURL = site_url+"/get_file.aspx?fn=" + item.SenderImg + "&width=200";
 
                     WebRequest req = WebRequest.Create(sURL);
 
@@ -767,9 +768,9 @@ namespace TicketClientApp
                 //flowLayoutPanel1.Controls.Remove(notifyControl);
 
                 if (arr[3].ToLower() == "true")//SenderIsAPool
-                    url = "https://ticket.nkums.ac.ir/home?token=" + _tk;
+                    url = site_url + "/home?token=" + _tk;
                 else
-                    url = "https://ticket.nkums.ac.ir/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk + qs;
+                    url = site_url + "/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk + qs;
 
                 System.Diagnostics.Process.Start(url);
 
@@ -814,8 +815,8 @@ namespace TicketClientApp
             //{
             //    tokenLink.LinkVisited = true;
 
-            //    string url = "https://ticket.nkums.ac.ir/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk;
-            //    //string url = "http://localhost:9609/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk;
+            //    string url = site_url+"/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk;
+            //    //string url = site_url+"http://localhost:9609/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk;
 
             //    System.Diagnostics.Process.Start(url);
 
@@ -858,7 +859,7 @@ namespace TicketClientApp
         private void linkLabel_ziroMessages_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
-            string url = "https://ticket.nkums.ac.ir/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk;
+            string url = site_url + "/ticketChatBox.aspx?viewMode=fullscreen&token=" + _tk;
             System.Diagnostics.Process.Start(url);
 
             this.WindowState = FormWindowState.Minimized;
@@ -868,7 +869,7 @@ namespace TicketClientApp
         {
             try
             {
-                string sURL = "https://ticket.nkums.ac.ir/get_file.aspx?fn=";
+                string sURL = site_url + "/get_file.aspx?fn=";
 
                 WebRequest req = WebRequest.Create(sURL);
 

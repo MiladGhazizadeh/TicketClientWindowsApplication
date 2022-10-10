@@ -38,7 +38,7 @@ namespace TicketClientApp
 
         private void textBox2_Enter(object sender, EventArgs e)
         {
-            if (textBox2.Text == "رمز عبور...")
+            if (textBox2.Text == "pass")
             {
                 textBox2.Text = "";
             }
@@ -48,7 +48,7 @@ namespace TicketClientApp
         private void textBox2_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox2.Text))
-                textBox2.Text = "رمز عبور...";
+                textBox2.Text = "pass";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace TicketClientApp
                 if (string.IsNullOrEmpty(textBox1.Text.Trim()) || textBox1.Text == "نام کاربری...")
                     textBox1.Focus();
                 else
-                if (string.IsNullOrEmpty(textBox2.Text.Trim()) || textBox2.Text == "رمز عبور...")
+                if (string.IsNullOrEmpty(textBox2.Text.Trim()) || textBox2.Text == "pass")
                     textBox2.Focus();
                 else
                 {
@@ -133,7 +133,7 @@ namespace TicketClientApp
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             textBox1.Text = "نام کاربری...";
-            textBox2.Text = "رمز عبور...";
+            textBox2.Text = "pass";
 
         }
 
@@ -147,7 +147,7 @@ namespace TicketClientApp
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                if (!string.IsNullOrEmpty(textBox2.Text.Trim()) && textBox2.Text != "رمز عبور...")
+                if (!string.IsNullOrEmpty(textBox2.Text.Trim()) && textBox2.Text != "pass")
                 {
                     btnLogin.Focus();
 
